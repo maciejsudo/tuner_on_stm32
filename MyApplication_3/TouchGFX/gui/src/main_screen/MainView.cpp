@@ -8,7 +8,7 @@
 
 //extern uint32_t fftoutputBuf[1024];
 //float yscale=0.00018;
-float yscale=0.000005;
+float yscale=0.0005;
 extern float_t realABSvalue[4096];//uint32_t realABSvalue[2048];//realABSvalue[512]; //float32_t
 
 extern uint8_t end_conv;
@@ -43,36 +43,12 @@ void MainView::handleTickEvent()
 
 //ogarnąć wyswietlanie widma FFT!!!
 	tickCounter++;
-	//begin_conv=0;
-	/*
-	if(abs(fund_freq - 82.00) == 5 || abs(fund_freq - 110.00) == 5 || abs(fund_freq - 146.00) == 5 || abs(fund_freq - 196.00) == 5 || abs(fund_freq - 246.00) == 5 || abs(fund_freq - 329.00) == 5 )
-	{
-	freq_average +=fund_freq;
-	}
-	if( tickCounter%3 == 0)
-	{
-	updatewildcard(freq_average/3);
-	freq_average=0;
-	}
-	*/
+
 	if(abs(fund_freq - 82.00) < 10 || abs(fund_freq - 110.00) < 10 || abs(fund_freq - 146.00) < 3 || abs(fund_freq - 196.00) < 10 || abs(fund_freq - 246.00) < 3 || abs(fund_freq - 329.00) < 3 )
 	{
 		updatewildcard(fund_freq);
 
 	}
-	//1//freq_average+=fund_freq;
-
-	//if (tickCounter%3==0)
-	//{
-	//fund_freq = ;
-	/*
-	if (tickCounter%10==0)
-	{
-	updatewildcard(freq_average/10);
-	freq_average=0;
-	}
-
-	*/
 
 
 
@@ -80,7 +56,7 @@ void MainView::handleTickEvent()
 	//{
 // -----UWAGA-- CHWILOWA -- MODYFIKACJA
 
-	for (int i=0;i<128;i++)//bylo 512 a potem 128 ale jest tylko 32 pierwsze próbki!
+	for (int i=0;i<256;i++)//bylo 512 a potem 128 ale jest tylko 32 pierwsze próbki!
     {
 
     	//graph.addDataPoint((float)((float)realABSvalue[i] * yscale+20));

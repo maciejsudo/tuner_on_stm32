@@ -94,8 +94,8 @@
               "DecimalSeparator": "Point",
               "TextColor": {
                 "Red": 255,
-                "Green": 0,
-                "Blue": 0
+                "Green": 255,
+                "Blue": 255
               },
               "TextId": "SingleUseId1",
               "Alpha": 255,
@@ -196,9 +196,9 @@
             "TextId": "SingleUseId7",
             "TextRotation": "0",
             "Color": {
-              "Red": 233,
-              "Green": 65,
-              "Blue": 16
+              "Red": 255,
+              "Green": 63,
+              "Blue": 63
             },
             "Alpha": 255,
             "AutoSize": true,
@@ -206,8 +206,8 @@
             "Name": "textArea4",
             "X": 620,
             "Y": 189,
-            "Width": 140,
-            "Height": 168,
+            "Width": 168,
+            "Height": 198,
             "Visible": true,
             "LockPosition": false,
             "Draggable": false,

@@ -40,7 +40,7 @@ MainViewBase::MainViewBase()
     graphMajorYAxisLabel.setScale(1000);
     graphMajorYAxisLabel.setInterval(20);
     graphMajorYAxisLabel.setLabelTypedText(touchgfx::TypedText(T_SINGLEUSEID1));
-    graphMajorYAxisLabel.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 0, 0));
+    graphMajorYAxisLabel.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 255, 255));
     graph.addLeftElement(graphMajorYAxisLabel);
 
     graphLine1.setScale(1000);
@@ -68,7 +68,7 @@ MainViewBase::MainViewBase()
     textArea3.setTypedText(touchgfx::TypedText(T_SINGLEUSEID5));
 
     textArea4.setXY(620, 189);
-    textArea4.setColor(touchgfx::Color::getColorFrom24BitRGB(233, 65, 16));
+    textArea4.setColor(touchgfx::Color::getColorFrom24BitRGB(255, 63, 63));
     textArea4.setLinespacing(0);
     textArea4.setTypedText(touchgfx::TypedText(T_SINGLEUSEID7));
 

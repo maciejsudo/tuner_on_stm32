@@ -154,6 +154,7 @@ void retBufsum()
 		//PlayBuf_sum[i] = PlayBuf_R[i];
 	}
 
+
 }
 
 
@@ -197,13 +198,7 @@ void fftPlayBufvalue()
 	arm_rfft_fast_f32(&fft_handler,&PlayBuf_sum ,&fftBuf,1);//ifft!!
 	arm_abs_f32(&fftBuf,&realABSvalue,AUDIO_REC*2);
 
-/*
-	arm_correlate_f32(&realABSvalue,2*AUDIO_REC, &realABSvalue,2*AUDIO_REC,&Correl_wyn);
-for(int i=0;i<AUDIO_REC;i++)
-{
-	realABSvalue[i] = Correl_wyn[i];//zabiera tylko połowę tego widma autokorelacji!
-}
-*/
+
 // teraz DFT spowrotem:
 
 	arm_rfft_fast_init_f32(&fft_handler,AUDIO_REC*2);
@@ -212,9 +207,9 @@ for(int i=0;i<AUDIO_REC;i++)
 
 
 
-
-///////////////////////////oryginalny kod!!!
 /*
+///////////////////////////oryginalny kod!!!
+
 	 //oryginalny kod -  i to działa
 	arm_rfft_fast_init_f32(&fft_handler,AUDIO_REC*2);
 	arm_rfft_fast_f32(&fft_handler,&PlayBuf_sum ,&fftBuf,0);
@@ -325,7 +320,12 @@ void DFSDM_Buffer_mod()
 		PlayBuf_sum[(i*2)+1]=(PlayBuf_R[i]);//abs(PlayBuf_R[i]);//probki 1,3,5,7..itd
 		//PlayBuf_sum[i] = PlayBuf_R[i];
 	}
-
+/*
+	for (int i=0;i<AUDIO_REC*2;i++)//windowing signal!!
+	{
+		PlayBuf_sum[i] = sin(i * M_PI/(4096))*PlayBuf_sum[i];
+	}
+*/
 	//calculate_filter_response(b,a);
 
 	fftPlayBufvalue();

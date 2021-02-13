@@ -24,7 +24,7 @@ struct TypographyFontIndex
     static const touchgfx::FontId LABELS = 0;        // NotoSans_Regular_12_4bpp
     static const touchgfx::FontId TYPOGRAPHY_00 = 1; // NotoSans_Regular_28_4bpp
     static const touchgfx::FontId TYPOGRAPHY_01 = 2; // NotoSans_Regular_31_4bpp
-    static const touchgfx::FontId TYPOGRAPHY_02 = 3; // NotoSans_Regular_20_4bpp
+    static const touchgfx::FontId TYPOGRAPHY_02 = 3; // NotoSans_Regular_24_4bpp
     static const uint16_t NUMBER_OF_FONTS = 4;
 };
 
