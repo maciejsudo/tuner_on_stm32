@@ -109,7 +109,7 @@ const osThreadAttr_t myTask02_attributes = {
   .stack_size = 512 * 4
 };
 /* USER CODE BEGIN PV */
-//#define AUDIO_REC 256  //1024
+
 
 
 
@@ -1579,7 +1579,7 @@ __weak void TouchGFX_Task(void *argument)
 
   for(;;)
   {
-	  //estimatefreq();
+
 	  osDelay(1);
 
 
@@ -1604,12 +1604,7 @@ __weak void StartTask02(void *argument)
 
 	  Filter_initialization();
 	  DFSDM_Buffer_mod();
-	  //fftPlayBufvalue();
 
-	  //osDelay(1);
-	  //estimatefreq();
-	  //hotfix
-	  //end_conv=1;//ustaw flagę ze zakończono konwersję
 
   }
 

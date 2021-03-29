@@ -12,9 +12,9 @@ int32_t RecBuf_L[AUDIO_REC];
 int32_t PlayBuf_R[AUDIO_REC];
 int32_t PlayBuf_L[AUDIO_REC];
 
-float  PlayBuf_sum[2*AUDIO_REC];//float32_t  PlayBuf_sum[2*AUDIO_REC]; //int32_t  PlayBuf_sum[2*AUDIO_REC];                  //float32_t
-float32_t realABSvalue[2*AUDIO_REC];  //int32_t realABSvalue[2*AUDIO_REC];                  //float32_t
-float32_t fftBuf[2*AUDIO_REC];  //int32_t fftBuf[2*AUDIO_REC];                        //float32_t
+float  PlayBuf_sum[2*AUDIO_REC];
+float32_t realABSvalue[2*AUDIO_REC];
+float32_t fftBuf[2*AUDIO_REC];
 
 float32_t Correl_wyn[4*AUDIO_REC];
 
@@ -37,31 +37,7 @@ float highpassPlayBuf[2*AUDIO_REC];
 float outlowpass[2*AUDIO_REC];
 float outhighpass[2*AUDIO_REC];
 
-/*
-//246.9 dla fs = 15625 oraz Q=30
-float a[3] ={ 0.001646 , 0.    ,   -0.001646};//246.0   //b
-float b[3] ={1.     ,    -1.98694643 , 0.99670801 };    //a
-float c[3] = {0.00164666,  0.      ,   -0.00164666};//246.1
-float d[3] = {1.         ,-1.98693716 , 0.99670667};
-float e[3] = {0.00164733 , 0.      ,   -0.00164733};//246.2
-float f[3] = {1.        , -1.9869279 ,  0.99670534};
-float g[3] = {0.001648 , 0.    ,   -0.001648};//246.3
-float h[3] = {1.       ,  -1.98691863 , 0.996704 };
-float i[3] = {0.00164867 , 0.     ,    -0.00164867};//246.4
-float j[3] = {1.       ,  -1.98690936 , 0.99670266};
-float k[3] = {0.00164934 , 0.     ,    -0.00164934};//246.5
-float l[3] = {1.        , -1.98690009 , 0.99670133};
-float m[3] = {0.00165 , 0.    ,  -0.00165};//246.6
-float n[3] = {1.     ,    -1.98689081 , 0.99669999};
-float o[3] = {0.00165067 , 0.      ,   -0.00165067};//246.7
-float p[3] = {1.       ,  -1.98688153 , 0.99669866};
-float r[3] = {0.00165134 , 0.       ,  -0.00165134};//246.8
-float s[3] = {1.       ,  -1.98687225 , 0.99669732};
-float t[3] = {0.00165201 , 0.        , -0.00165201};//246.9
-float u[3] = {1.      ,   -1.98686296 , 0.99669598};
 
-//jako drugi argument do funkcji idzie zawsze to z jedynką na dole!
-*/
 
 ////Callbacks://////////////////////////////////////////////////////////////////////////
 void HAL_DFSDM_FilterRegConvHalfCpltCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filter)
@@ -72,59 +48,7 @@ void HAL_DFSDM_FilterRegConvCpltCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filt
 {
 	DmaRecBuffCplt=1;
 }
-////////////////////////////////////////////////////////////////////////////////////////
-//Table of filter coefficients values:
-/*////////////////////246.00////////////////////////////////////////////////////////////
- * 246.0  =
- [ 0.001646  0.       -0.001646]
- [ 1.         -1.98694643  0.99670801]
 
-
-246.1  =
- [ 0.00164666  0.         -0.00164666]
- [ 1.         -1.98693716  0.99670667]
-
-
-246.2  =
- [ 0.00164733  0.         -0.00164733]
- [ 1.         -1.9869279   0.99670534]
-
-
-246.3  =
- [ 0.001648  0.       -0.001648]
- [ 1.         -1.98691863  0.996704  ]
-
-
-246.4  =
- [ 0.00164867  0.         -0.00164867]
- [ 1.         -1.98690936  0.99670266]
-
-
-246.5  =
- [ 0.00164934  0.         -0.00164934]
- [ 1.         -1.98690009  0.99670133]
-
-
-246.6  =
- [ 0.00165  0.      -0.00165]
- [ 1.         -1.98689081  0.99669999]
-
-
-246.7  =
- [ 0.00165067  0.         -0.00165067]
- [ 1.         -1.98688153  0.99669866]
-
-
-246.8  =
- [ 0.00165134  0.         -0.00165134]
- [ 1.         -1.98687225  0.99669732]
-
-
-246.9  =
- [ 0.00165201  0.         -0.00165201]
- [ 1.         -1.98686296  0.99669598]
-/////////////////////////////////////////////////////////////////////////////////
- */
 
 
 void Filter_initialization()
@@ -136,22 +60,16 @@ void Filter_initialization()
 	  //Right channel audio samples(with extra PDM 3 last bits)
 }
 
-/*
-int32_t retPlayBufsum(uint16_t number)
-{
 
-return PlayBuf_sum[number];
-}
-*/
 
 
 void retBufsum()
 {
 	for(int i=0;i<AUDIO_REC;i++)
 	{
-		PlayBuf_sum[i*2]=(PlayBuf_L[i]);//abs(PlayBuf_L[i]);//probki 0,2,4,6..itd
-		PlayBuf_sum[(i*2)+1]=(PlayBuf_R[i]);//abs(PlayBuf_R[i]);//probki 1,3,5,7..itd
-		//PlayBuf_sum[i] = PlayBuf_R[i];
+		PlayBuf_sum[i*2]=(PlayBuf_L[i]);// 0,2,4,6..itd
+		PlayBuf_sum[(i*2)+1]=(PlayBuf_R[i]);//probki 1,3,5,7..itd
+
 	}
 
 
@@ -162,12 +80,7 @@ void retBufsum()
 
 void fftPlayBufvalue()
 {
-	//calculate_filter_response(b, a);
-/*	for (int i=0;i<AUDIO_REC*2;i++)//hamming window
-	{
-		PlayBuf_sum[i] = sinf(i*M_PI/2048) * PlayBuf_sum[i];
-  }*/
-	//tolonen algorithm!!!
+
 
 
 
@@ -207,16 +120,6 @@ void fftPlayBufvalue()
 
 
 
-/*
-///////////////////////////oryginalny kod!!!
-
-	 //oryginalny kod -  i to działa
-	arm_rfft_fast_init_f32(&fft_handler,AUDIO_REC*2);
-	arm_rfft_fast_f32(&fft_handler,&PlayBuf_sum ,&fftBuf,0);
-	//addded peak filter calculation
-	//arm_rfft_fast_f32(&fft_handler,&afterfilter ,&fftBuf,0);
-	arm_abs_f32(&fftBuf,&realABSvalue,AUDIO_REC*2);
-*/
 
 
 
@@ -258,32 +161,13 @@ void calculate_filter_response(float a[],float b[])
 
 void estimatefreq(float realABSvalue[])
 {
-	//tutaj w obrębie całej funkcji wartosc realABS value musi być stabilna, nie zmieniana!!
-//ziel//int32_t N = AUDIO_REC*2;
-int max_bin = find_maximum(realABSvalue,AUDIO_REC*2);//ziel// zamiast RealABSvalue dałem Correl_Wyn
-float resolut=3.81469727;//7.6293945;//moj//
 
-/*//ziel//
-int32_t k[3] ={max_bin - 1, max_bin, max_bin + 1};
-float dw, wkm1, wk, wkp1, we;
-float complex r, R, lam;
-dw = 2*M_PI/N;
-wkm1 = (k[0])*dw;
-wk = (k[1])*dw;
-wkp1 = (k[2])*dw;
-r = ( -cexp( -I*wk) + cexp( -I*wkm1) )/( -cexp(-I*wkp1) + cexp(-I*wk) );
-R = ( realABSvalue[k[0]]-realABSvalue[k[1]] )/( realABSvalue[k[1]]-realABSvalue[k[2]] );
-lam= cexp(I*wk)*(r-R)/( r*cexp(-I*2*M_PI/N)-R*cexp(I*2*M_PI/N) );
+int max_bin = find_maximum(realABSvalue,AUDIO_REC*2);
+float resolut=3.81469727;
 
-we = cimag(clogf(lam));
-*/
 float inter_bin = max_bin + log(realABSvalue[max_bin+1]/realABSvalue[max_bin-1])*0.5 / log(realABSvalue[max_bin] * realABSvalue[max_bin]/(realABSvalue[max_bin+1]*realABSvalue[max_bin-1]));
-//moj//
 
-fund_freq = inter_bin * resolut;//moj//
-//ziel//fund_freq = we/(2*M_PI)*15625;//16000;//15625;//16000.0 ;//48.000;//- 0.013;
-
-
+fund_freq = inter_bin * resolut;
 
 
 }
@@ -291,8 +175,6 @@ fund_freq = inter_bin * resolut;//moj//
 
 void DFSDM_Buffer_mod()
 {
-	//if (end_conv==0)
-	//{
 	if(DmaRecHalfBuffCplt==1)
 	{
 		for(int i=0;i<AUDIO_REC/2;i++)
@@ -316,17 +198,11 @@ void DFSDM_Buffer_mod()
 	//retBufsum();
 	for(int i=0;i<AUDIO_REC;i++)
 	{
-		PlayBuf_sum[i*2]=(PlayBuf_L[i]);//abs(PlayBuf_L[i]);//probki 0,2,4,6..itd
-		PlayBuf_sum[(i*2)+1]=(PlayBuf_R[i]);//abs(PlayBuf_R[i]);//probki 1,3,5,7..itd
-		//PlayBuf_sum[i] = PlayBuf_R[i];
+		PlayBuf_sum[i*2]=(PlayBuf_L[i]);//probki 0,2,4,6..itd
+		PlayBuf_sum[(i*2)+1]=(PlayBuf_R[i]);//probki 1,3,5,7..itd
+
 	}
-/*
-	for (int i=0;i<AUDIO_REC*2;i++)//windowing signal!!
-	{
-		PlayBuf_sum[i] = sin(i * M_PI/(4096))*PlayBuf_sum[i];
-	}
-*/
-	//calculate_filter_response(b,a);
+
 
 	fftPlayBufvalue();
 
