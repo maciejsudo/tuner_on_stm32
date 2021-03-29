@@ -9,7 +9,7 @@ Project mainly concentrates on fundamental frequency estimation algorithm based 
 Photo above shows proper estimation of E4 string frequency(~329.6Hz)  
 # Block diagram of the system  
 
-Photo below shows all used onboard peripheralls such as MEMS microphones, DFSDM module,PDM2PCM and TouchGFX Module.  
-Data from two mems microhones is firstly filtered by Sinc filters...
+Photo below shows all used onboard peripheralls such as MEMS microphones, DFSDM module,PDM2PCM and TouchGFX Module included in block diagram.  
+![alt text](https://github.com/maciejsudo/tuner_on_stm32/blob/master/tuner_photo.png?raw=true)  
 
 # To be continued...
